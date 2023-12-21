@@ -5,7 +5,22 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 const router = createBrowserRouter([
   {
-    path: "/"
+    path: "/",
+    children: [
+      {
+        path: 'login'
+      },
+      {
+        path: 'posts',
+      },
+      {
+        path: 'posts/:postid',
+      },
+      {
+        path: 'create-post',
+      },
+    ]
+
   }
 ])
 
