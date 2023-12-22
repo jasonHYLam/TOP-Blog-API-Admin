@@ -4,6 +4,7 @@ export async function allBlogPostsLoader() {
     console.log('attempting all fetch')
     return await fetch('http://localhost:3000/home', {
         // I may need to pass JWT for this?
+        credentials: "include"
     })
     .then(res => res.json())
 
@@ -11,8 +12,9 @@ export async function allBlogPostsLoader() {
 
 export function AllBlogPostsPage() {
 
-    const { allPosts } = useLoaderData();
+    const { allPosts, user } = useLoaderData();
     console.log(allPosts)
+    console.log(`checking user: ${user}`)
 
     return (
         <>
