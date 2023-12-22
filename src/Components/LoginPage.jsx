@@ -29,7 +29,6 @@ export function LoginPage() {
             }
         })
 
-        // NEED TO DISPLAY ERROR MESSAGES HOW DO I DO THAT
     }
     return (
         <>
