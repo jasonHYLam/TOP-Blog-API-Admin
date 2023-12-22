@@ -25,7 +25,7 @@ export function LoginPage() {
             else {
                 console.log('a most incredible success')
                 console.log(res)
-                // navigate('/posts');
+                navigate('/posts');
             }
         })
 
