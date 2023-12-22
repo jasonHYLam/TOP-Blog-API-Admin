@@ -17,6 +17,13 @@ export function AllBlogPostsPage() {
     return (
         <>
         <p>All posts</p>
+
+        {(!allPosts.length) ? <p>No posts. Create a post?</p> 
+        :
+        allPosts.map(post => {
+            <p>heh</p>
+        })
+        }
         
         </>
     )
