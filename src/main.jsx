@@ -6,7 +6,6 @@ import { createBrowserRouter, RouterProvider, useLoaderData } from 'react-router
 import { LoginPage } from './Components/LoginPage'
 import { AllBlogPostsPage, allBlogPostsLoader } from './Components/AllBlogPostsPage'
 import { CreateBlogPostPage } from './Components/CreateBlogPostPage'
-import { onSubmit } from './Components/CreateBlogPostPage'
 
 const router = createBrowserRouter([
   {
