@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom"
+import { useLoaderData, Link } from "react-router-dom"
 
 export async function allBlogPostsLoader() {
     console.log('attempting all fetch')
@@ -28,7 +28,12 @@ export function AllBlogPostsPage() {
         allPosts.map(post => {
             return (
                 <>
-                    <p>{post.title}</p>
+                <Link key={post._id} to={`/posts/${post._id}`}>
+                    <section>
+                        <p>{post.title}</p>
+                        <p> by {post.author.username}</p>
+                    </section>
+                </Link>
                 </>
             )
         })
