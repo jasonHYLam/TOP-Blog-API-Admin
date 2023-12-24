@@ -17,69 +17,78 @@ export async function blogPostPageLoader({params}) {
 export function BlogPostPage() {
 
     const { blogPost, comments } = useLoaderData();
-    const [deleteStatus, setDeleteStatus] = useState(false);
-    const [publishStatus, setPublishStatus] = useState(false);
-    const [editStatus, setEditStatus] = useState(false);
-    
+    const [currentStatus, setCurrentStatus] = useState('')
+
+    const oppositeOfPublishedStatus = blogPost.publishedStatus ? 'Unpublish' : 'Publish';
+
+    console.log('checking blogPost publish status')
+    console.log(blogPost.published_status)
+
     function handleDeleteButtonClick() {
-        if (!deleteStatus) setDeleteStatus(true);
-        console.log(`deleteStatus status: ${deleteStatus}`)
+        if (currentStatus !== 'delete') setCurrentStatus('delete');
+        console.log(`currentStatus status: ${currentStatus}`)
     }
 
     function handlePublishButtonClick() {
-        if (!publishStatus) setPublishStatus(true);
-        console.log(`publishStatus status: ${publishStatus}`)
+        if (currentStatus !== 'publish') setCurrentStatus('publish');
+        console.log(`currentStatus status: ${currentStatus}`)
     }
 
     function handleEditButtonClick() {
-        if (!editStatus) setEditStatus(true);
-        console.log(`editStatus status: ${editStatus}`)
+        if (currentStatus !== 'edit') setCurrentStatus('edit');
+        console.log(`currentStatus status: ${currentStatus}`)
     }
 
 
     function handleCancelButtonClick() {
-        if (deleteStatus) setDeleteStatus(false);
-        else if (publishStatus) setPublishStatus(false);
+        if (currentStatus !== '') setCurrentStatus('');
     }
 
     function handleConfirmDelete() {
+        // i want to test this last
     }
 
     function handleConfirmPublish() {
+        // this shouldn't be too difficult. actually it might be. 
     }
 
     function handleConfirmEdit() {
+        // currently I can see that this may have quite a few steps
+        // first
     }
-
-    // i probably need to put these modals in a separate component
 
     // this multiple ternary operator is hellish
 
     return (
         <>
         <button onClick={handleDeleteButtonClick}>Delete</button>
-        <button onClick={handlePublishButtonClick}>Publish</button>
+        <button onClick={handlePublishButtonClick}>{oppositeOfPublishedStatus}</button>
         <button onClick={handleEditButtonClick}>Edit</button>
 
-        {/* show Modal if  */}
-        {deleteStatus ? 
-        <Modal action={'delete'} handleAction={handleConfirmDelete} handleCancel={handleCancelButtonClick}></Modal>
+        {// Show delete/publish/edit modals depending on current status of Page component.
+        currentStatus === 'delete' ? <Modal action={'delete'} handleAction={handleConfirmDelete} handleCancel={handleCancelButtonClick}></Modal>
 
-        : publishStatus ? 
-        <Modal action={'publish'} handleAction={handleConfirmPublish} handleCancel={handleCancelButtonClick}></Modal>
-
-        : editStatus ?
-        // this needs to be different/ need to hide the blogcontent, and show the editor. maybe i need to create a new route...
-        null
-
+        : currentStatus === 'publish' ?  
+        
+        <Modal action={oppositeOfPublishedStatus.toLowerCase()} handleAction={handleConfirmPublish} handleCancel={handleCancelButtonClick}></Modal>
         : null
         }
+
+        { 
+        // If currentStatus is true, then show the TinyMCE. Otherwise show the content.
+        currentStatus === 'edit' ? 
+        <>
+        <p>Currently editing:</p>
+        </>
+        :
 
         <section>
             <section>
                 <section>
                     <h1>{blogPost.title}</h1>
                     <p>by {blogPost.author.username}</p>
+                    {blogPost.published_status ? <p>Currently published</p> : <p>Currently unpublished</p>}
+
                 </section>
                 <hr />
                 <section>
@@ -91,6 +100,9 @@ export function BlogPostPage() {
                 <h2>Comments</h2>
             </section>
         </section>
+        
+    }
+
         </>
     )
 }
