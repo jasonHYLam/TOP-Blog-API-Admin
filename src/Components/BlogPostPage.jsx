@@ -1,6 +1,7 @@
 import { useLoaderData, useParams } from "react-router-dom"
 import parse from 'html-react-parser';
 import { useState } from "react";
+import { Modal } from "./Modal";
 
 // Called before the BlogPostPage component renders.
 // Loader functions somehow have access to the params object.
@@ -16,29 +17,38 @@ export async function blogPostPageLoader({params}) {
 export function BlogPostPage() {
 
     const { blogPost, comments } = useLoaderData();
-    const [confirmDelete, setConfirmDelete] = useState(false);
-    const [confirmPublish, setConfirmPublish] = useState(false);
-    const [confirmEdit, setConfirmEdit] = useState(false);
+    const [deleteStatus, setDeleteStatus] = useState(false);
+    const [publishStatus, setPublishStatus] = useState(false);
+    const [editStatus, setEditStatus] = useState(false);
     
     function handleDeleteButtonClick() {
-        if (!confirmDelete) setConfirmDelete(true);
-        console.log(`confirmDelete status: ${confirmDelete}`)
+        if (!deleteStatus) setDeleteStatus(true);
+        console.log(`deleteStatus status: ${deleteStatus}`)
     }
 
     function handlePublishButtonClick() {
-        if (!confirmPublish) setConfirmPublish(true);
-        console.log(`confirmPublish status: ${confirmPublish}`)
+        if (!publishStatus) setPublishStatus(true);
+        console.log(`publishStatus status: ${publishStatus}`)
     }
 
     function handleEditButtonClick() {
-        if (!confirmEdit) setConfirmEdit(true);
-        console.log(`confirmEdit status: ${confirmEdit}`)
+        if (!editStatus) setEditStatus(true);
+        console.log(`editStatus status: ${editStatus}`)
     }
 
 
     function handleCancelButtonClick() {
-        if (confirmDelete) setConfirmDelete(false);
-        else if (confirmPublish) setConfirmPublish(false);
+        if (deleteStatus) setDeleteStatus(false);
+        else if (publishStatus) setPublishStatus(false);
+    }
+
+    function handleConfirmDelete() {
+    }
+
+    function handleConfirmPublish() {
+    }
+
+    function handleConfirmEdit() {
     }
 
     // i probably need to put these modals in a separate component
@@ -51,22 +61,14 @@ export function BlogPostPage() {
         <button onClick={handlePublishButtonClick}>Publish</button>
         <button onClick={handleEditButtonClick}>Edit</button>
 
-        {confirmDelete ? 
-        <section>
-            <p>Are you sure you want to delete?</p>
-            <button>Yes</button>
-            <button onClick={handleCancelButtonClick}>Cancel</button>
-        </section> 
+        {/* show Modal if  */}
+        {deleteStatus ? 
+        <Modal action={'delete'} handleAction={handleConfirmDelete} handleCancel={handleCancelButtonClick}></Modal>
 
-        : confirmPublish ?
+        : publishStatus ? 
+        <Modal action={'publish'} handleAction={handleConfirmPublish} handleCancel={handleCancelButtonClick}></Modal>
 
-        <section>
-            <p>Are you sure you want to publish?</p>
-            <button>Yes</button>
-            <button onClick={handleCancelButtonClick}>Cancel</button>
-        </section> 
-
-        : confirmEdit ?
+        : editStatus ?
         // this needs to be different/ need to hide the blogcontent, and show the editor. maybe i need to create a new route...
         null
 
