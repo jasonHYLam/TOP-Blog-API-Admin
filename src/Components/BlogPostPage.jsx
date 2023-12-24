@@ -68,9 +68,8 @@ export function BlogPostPage() {
         {// Show delete/publish/edit modals depending on current status of Page component.
         currentStatus === 'delete' ? <Modal action={'delete'} handleAction={handleConfirmDelete} handleCancel={handleCancelButtonClick}></Modal>
 
-        : currentStatus === 'publish' ?  
-        
-        <Modal action={oppositeOfPublishedStatus.toLowerCase()} handleAction={handleConfirmPublish} handleCancel={handleCancelButtonClick}></Modal>
+        : currentStatus === 'publish' ?  <Modal action={oppositeOfPublishedStatus.toLowerCase()} handleAction={handleConfirmPublish} handleCancel={handleCancelButtonClick}></Modal>
+
         : null
         }
 
