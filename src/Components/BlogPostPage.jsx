@@ -2,6 +2,7 @@ import { useLoaderData, useParams } from "react-router-dom"
 import parse from 'html-react-parser';
 import { useState } from "react";
 import { Modal } from "./Modal";
+import { BlogPostCreator } from "./BlogPostCreator";
 
 // Called before the BlogPostPage component renders.
 // Loader functions somehow have access to the params object.
@@ -18,11 +19,8 @@ export function BlogPostPage() {
 
     const { blogPost, comments } = useLoaderData();
     const [currentStatus, setCurrentStatus] = useState('')
-
     const oppositeOfPublishedStatus = blogPost.publishedStatus ? 'Unpublish' : 'Publish';
 
-    console.log('checking blogPost publish status')
-    console.log(blogPost.published_status)
 
     function handleDeleteButtonClick() {
         if (currentStatus !== 'delete') setCurrentStatus('delete');
@@ -36,6 +34,7 @@ export function BlogPostPage() {
 
     function handleEditButtonClick() {
         if (currentStatus !== 'edit') setCurrentStatus('edit');
+        console.log(JSON.stringify(blogPost.content))
         console.log(`currentStatus status: ${currentStatus}`)
     }
 
@@ -78,6 +77,8 @@ export function BlogPostPage() {
         currentStatus === 'edit' ? 
         <>
         <p>Currently editing:</p>
+        <BlogPostCreator title={blogPost.title} blogContent={JSON.stringify(blogPost.content)}/>
+
         </>
         :
 
