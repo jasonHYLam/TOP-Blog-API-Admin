@@ -17,6 +17,11 @@ export async function blogPostPageLoader({params}) {
 // html-react-parser is used to parse the HTML content into React elements.
 export function BlogPostPage() {
 
+
+    const {postid} = useParams();
+    console.log('checking out postid')
+    console.log(postid)
+
     const { blogPost, comments } = useLoaderData();
     const [currentStatus, setCurrentStatus] = useState('')
     const oppositeOfPublishedStatus = blogPost.publishedStatus ? 'Unpublish' : 'Publish';
@@ -77,7 +82,7 @@ export function BlogPostPage() {
         currentStatus === 'edit' ? 
         <>
         <p>Currently editing:</p>
-        <BlogPostCreator title={blogPost.title} blogContent={JSON.stringify(blogPost.content)}/>
+        <BlogPostCreator title={blogPost.title} blogContent={blogPost.content} action={'edit'} postid={postid}/>
 
         </>
         :
