@@ -54,14 +54,16 @@ export function BlogPostPage() {
 
     function handleConfirmPublish() {
         // this shouldn't be too difficult. actually it might be. 
+        // need to send the publish status
+        fetch(`http://localhost:3000/admin_blog_post/${postid}/change_publish`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Credentials': true
+            },
+        })
     }
 
-    function handleConfirmEdit() {
-        // currently I can see that this may have quite a few steps
-        // first
-    }
-
-    // this multiple ternary operator is hellish
 
     return (
         <>
@@ -69,7 +71,7 @@ export function BlogPostPage() {
         <button onClick={handlePublishButtonClick}>{oppositeOfPublishedStatus}</button>
         <button onClick={handleEditButtonClick}>Edit</button>
 
-        {// Show delete/publish/edit modals depending on current status of Page component.
+        {// Show delete/publish/edit modals depending on current status of Page component, using ternary operator.
         currentStatus === 'delete' ? <Modal action={'delete'} handleAction={handleConfirmDelete} handleCancel={handleCancelButtonClick}></Modal>
 
         : currentStatus === 'publish' ?  <Modal action={oppositeOfPublishedStatus.toLowerCase()} handleAction={handleConfirmPublish} handleCancel={handleCancelButtonClick}></Modal>
@@ -78,7 +80,7 @@ export function BlogPostPage() {
         }
 
         { 
-        // If currentStatus is true, then show the TinyMCE. Otherwise show the content.
+        // If currentStatus is true, then show the TinyMCE editor. Otherwise show the content.
         currentStatus === 'edit' ? 
         <>
         <p>Currently editing:</p>
