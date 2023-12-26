@@ -1,13 +1,15 @@
-import { useLoaderData, useNavigate, useParams } from "react-router-dom"
+import { useFetcher, useLoaderData, useNavigate, useParams } from "react-router-dom"
 import parse from 'html-react-parser';
 import { useEffect, useState } from "react";
 import { Modal } from "./Modal";
 import { BlogPostCreator } from "./BlogPostCreator";
+import { set } from "react-hook-form";
 
 // Called before the BlogPostPage component renders.
 // Loader functions somehow have access to the params object.
 
 // export async function blogPostPageLoader({params}) {
+//     console.log('check that BLOGPOSTPAGE LOADER is called')
 //     const response = await fetch(`http://localhost:3000/admin_blog_post/${params.postid}`, {
 //         credentials: 'include',
 //     })
@@ -21,24 +23,12 @@ export function BlogPostPage() {
 
     const [ blogPost, setBlogPost ] = useState({});
     const [ comments , setComments ] = useState({});
-
-    // call this in useEffect
-    // async function blogPostPageLoader({params}) {
-
-    //     console.log('checking blogPostPage functionality')
-    //     const response = await fetch(`http://localhost:3000/admin_blog_post/${params.postid}`, {
-    //         credentials: 'include',
-    //     })
-    //     const { blogPost, comments } = await response.json()
-    //     // return data
-
-    //     setBlogPost(blogPost);
-    //     setComments(comments);
-    // }
-        console.log('checking blogPostPage functionality')
-
+    const [ isLoaded, setIsLoaded ] = useState(false);
 
     const {postid} = useParams();
+
+    // maybe I have to use this. I am not sure how this works yet.
+    // const fetcher = useFetcher();
 
     // const { blogPost, comments } = useLoaderData();
 
@@ -48,7 +38,7 @@ export function BlogPostPage() {
     const oppositeOfPublishedStatus = blogPost.published_status === true ? 'Unpublish' : 'Publish';
 
     // really hope this works...
-    // useEffect(blogPostPageLoader, [blogPost, comments])
+
     useEffect( () => {
         console.log('checking out if useEffect is called')
         async function blogPostPageLoader() {
@@ -57,16 +47,30 @@ export function BlogPostPage() {
             credentials: 'include',
         })
         const { blogPost, comments } = await response.json()
-        // return data
 
+        setIsLoaded(true);
         setBlogPost(blogPost);
         setComments(comments);
         }
 
         blogPostPageLoader()
 
-    }, [blogPost, comments, postid])
+    }, 
+    // [blogPost, comments, isLoaded]
+    // []
+    [isLoaded]
 
+    )
+
+    console.log('checking out IsLoaded')
+    console.log(isLoaded)
+    console.log(' ')
+    console.log('checking out blogPost')
+    console.log(blogPost)
+    console.log(' ')
+    console.log('checking out comments')
+    console.log(comments)
+    console.log(' ')
     function handleDeleteButtonClick() {
         if (currentStatus !== 'delete') setCurrentStatus('delete');
         console.log(`currentStatus status: ${currentStatus}`)
@@ -98,6 +102,7 @@ export function BlogPostPage() {
             credentials: 'include',
         })
         // then frankly should navigate back to allPosts page. maybe do a cheeky little useEffect.
+        // navigate('/posts', {replace: true})
         navigate('/posts')
     }
 
@@ -110,12 +115,14 @@ export function BlogPostPage() {
             },
             credentials: 'include',
         })
+        navigate(`/posts/${postid}`, {replace: true})
+        // navigate(`.`)
     }
 
 
     return (
+        !isLoaded ? <p>Loading</p> : 
         <>
-        {console.log('does this happen')}
         <button onClick={handleDeleteButtonClick}>Delete</button>
         <button onClick={handlePublishButtonClick}>{oppositeOfPublishedStatus}</button>
         <button onClick={handleEditButtonClick}>Edit</button>
