@@ -1,37 +1,71 @@
-import { useLoaderData, useParams } from "react-router-dom"
+import { useLoaderData, useNavigate, useParams } from "react-router-dom"
 import parse from 'html-react-parser';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "./Modal";
 import { BlogPostCreator } from "./BlogPostCreator";
 
 // Called before the BlogPostPage component renders.
 // Loader functions somehow have access to the params object.
-export async function blogPostPageLoader({params}) {
-    const response = await fetch(`http://localhost:3000/admin_blog_post/${params.postid}`, {
-        credentials: 'include',
-    })
-    const data = await response.json()
-    return data
-}
+
+// export async function blogPostPageLoader({params}) {
+//     const response = await fetch(`http://localhost:3000/admin_blog_post/${params.postid}`, {
+//         credentials: 'include',
+//     })
+//     const data = await response.json()
+//     return data
+// }
 
 // html-react-parser is used to parse the HTML content into React elements.
 export function BlogPostPage() {
 
 
+    const [ blogPost, setBlogPost ] = useState({});
+    const [ comments , setComments ] = useState({});
+
+    // call this in useEffect
+    // async function blogPostPageLoader({params}) {
+
+    //     console.log('checking blogPostPage functionality')
+    //     const response = await fetch(`http://localhost:3000/admin_blog_post/${params.postid}`, {
+    //         credentials: 'include',
+    //     })
+    //     const { blogPost, comments } = await response.json()
+    //     // return data
+
+    //     setBlogPost(blogPost);
+    //     setComments(comments);
+    // }
+        console.log('checking blogPostPage functionality')
+
+
     const {postid} = useParams();
 
-    const { blogPost, comments } = useLoaderData();
+    // const { blogPost, comments } = useLoaderData();
+
+
     const [currentStatus, setCurrentStatus] = useState('')
+    const navigate = useNavigate();
     const oppositeOfPublishedStatus = blogPost.published_status === true ? 'Unpublish' : 'Publish';
 
-    console.log('checking out published status')
-    console.log(blogPost)
-    console.log(blogPost.published_status)
+    // really hope this works...
+    // useEffect(blogPostPageLoader, [blogPost, comments])
+    useEffect( () => {
+        console.log('checking out if useEffect is called')
+        async function blogPostPageLoader() {
 
+        const response = await fetch(`http://localhost:3000/admin_blog_post/${postid}`, {
+            credentials: 'include',
+        })
+        const { blogPost, comments } = await response.json()
+        // return data
 
-    console.log('checking out oppositeOfPublishedStatus')
-    console.log(oppositeOfPublishedStatus)
+        setBlogPost(blogPost);
+        setComments(comments);
+        }
 
+        blogPostPageLoader()
+
+    }, [blogPost, comments, postid])
 
     function handleDeleteButtonClick() {
         if (currentStatus !== 'delete') setCurrentStatus('delete');
@@ -55,7 +89,6 @@ export function BlogPostPage() {
     }
 
     function handleConfirmDelete() {
-        // i want to test this last
         fetch(`http://localhost:3000/admin_blog_post/${postid}/delete_post`, {
             method: 'DELETE',
             headers: {
@@ -64,11 +97,11 @@ export function BlogPostPage() {
             },
             credentials: 'include',
         })
+        // then frankly should navigate back to allPosts page. maybe do a cheeky little useEffect.
+        navigate('/posts')
     }
 
     function handleConfirmPublish() {
-        // this shouldn't be too difficult. actually it might be. 
-        // need to send the publish status
         fetch(`http://localhost:3000/admin_blog_post/${postid}/change_publish`, {
             method: 'PUT',
             headers: {
@@ -82,6 +115,7 @@ export function BlogPostPage() {
 
     return (
         <>
+        {console.log('does this happen')}
         <button onClick={handleDeleteButtonClick}>Delete</button>
         <button onClick={handlePublishButtonClick}>{oppositeOfPublishedStatus}</button>
         <button onClick={handleEditButtonClick}>Edit</button>

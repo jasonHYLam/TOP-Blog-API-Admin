@@ -6,7 +6,8 @@ import { createBrowserRouter, RouterProvider, useLoaderData } from 'react-router
 import { LoginPage } from './Components/LoginPage'
 import { AllBlogPostsPage, allBlogPostsLoader } from './Components/AllBlogPostsPage'
 import { CreateBlogPostPage } from './Components/CreateBlogPostPage'
-import { BlogPostPage, blogPostPageLoader } from './Components/BlogPostPage'
+// import { BlogPostPage, blogPostPageLoader } from './Components/BlogPostPage'
+import { BlogPostPage } from './Components/BlogPostPage'
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
       {
         path: 'posts/:postid',
         element: <BlogPostPage/>,
-        loader: blogPostPageLoader,
+        // loader: blogPostPageLoader,
       },
       {
         path: 'create-post',
