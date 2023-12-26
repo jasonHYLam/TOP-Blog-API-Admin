@@ -19,12 +19,18 @@ export function BlogPostPage() {
 
 
     const {postid} = useParams();
-    console.log('checking out postid')
-    console.log(postid)
 
     const { blogPost, comments } = useLoaderData();
     const [currentStatus, setCurrentStatus] = useState('')
-    const oppositeOfPublishedStatus = blogPost.publishedStatus ? 'Unpublish' : 'Publish';
+    const oppositeOfPublishedStatus = blogPost.published_status === true ? 'Unpublish' : 'Publish';
+
+    console.log('checking out published status')
+    console.log(blogPost)
+    console.log(blogPost.published_status)
+
+
+    console.log('checking out oppositeOfPublishedStatus')
+    console.log(oppositeOfPublishedStatus)
 
 
     function handleDeleteButtonClick() {
@@ -50,6 +56,14 @@ export function BlogPostPage() {
 
     function handleConfirmDelete() {
         // i want to test this last
+        fetch(`http://localhost:3000/admin_blog_post/${postid}/delete_post`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Credentials': true,
+            },
+            credentials: 'include',
+        })
     }
 
     function handleConfirmPublish() {
@@ -61,6 +75,7 @@ export function BlogPostPage() {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Credentials': true
             },
+            credentials: 'include',
         })
     }
 
