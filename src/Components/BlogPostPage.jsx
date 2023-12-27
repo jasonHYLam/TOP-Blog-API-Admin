@@ -1,6 +1,6 @@
 import { useFetcher, useLoaderData, useNavigate, useParams } from "react-router-dom"
 import parse from 'html-react-parser';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Modal } from "./Modal";
 import { BlogPostCreator } from "./BlogPostCreator";
 import { set } from "react-hook-form";
@@ -20,24 +20,20 @@ import { set } from "react-hook-form";
 // html-react-parser is used to parse the HTML content into React elements.
 export function BlogPostPage() {
 
-
     const [ blogPost, setBlogPost ] = useState({});
     const [ comments , setComments ] = useState({});
     const [ isLoaded, setIsLoaded ] = useState(false);
 
     const {postid} = useParams();
 
-    // maybe I have to use this. I am not sure how this works yet.
-    // const fetcher = useFetcher();
-
     // const { blogPost, comments } = useLoaderData();
 
 
     const [currentStatus, setCurrentStatus] = useState('')
+    // isChangeSubmitted is used to determine whether useEffect callback is called, as it is in the dependency array.
+    const [ isChangeSubmitted, setIsChangeSubmitted ] = useState(false)
     const navigate = useNavigate();
     const oppositeOfPublishedStatus = blogPost.published_status === true ? 'Unpublish' : 'Publish';
-
-    // really hope this works...
 
     useEffect( () => {
         console.log('checking out if useEffect is called')
@@ -51,26 +47,15 @@ export function BlogPostPage() {
         setIsLoaded(true);
         setBlogPost(blogPost);
         setComments(comments);
+        
+        // this will eventually stop rerenders.
+        setIsChangeSubmitted(false)
         }
-
         blogPostPageLoader()
-
     }, 
-    // [blogPost, comments, isLoaded]
-    // []
-    [isLoaded]
-
+    [isLoaded, postid, isChangeSubmitted]
     )
 
-    console.log('checking out IsLoaded')
-    console.log(isLoaded)
-    console.log(' ')
-    console.log('checking out blogPost')
-    console.log(blogPost)
-    console.log(' ')
-    console.log('checking out comments')
-    console.log(comments)
-    console.log(' ')
     function handleDeleteButtonClick() {
         if (currentStatus !== 'delete') setCurrentStatus('delete');
         console.log(`currentStatus status: ${currentStatus}`)
@@ -101,6 +86,8 @@ export function BlogPostPage() {
             },
             credentials: 'include',
         })
+        setIsChangeSubmitted(true);
+        setCurrentStatus('');
         // then frankly should navigate back to allPosts page. maybe do a cheeky little useEffect.
         // navigate('/posts', {replace: true})
         navigate('/posts')
@@ -115,8 +102,8 @@ export function BlogPostPage() {
             },
             credentials: 'include',
         })
-        navigate(`/posts/${postid}`, {replace: true})
-        // navigate(`.`)
+        setIsChangeSubmitted(true);
+        setCurrentStatus('');
     }
 
 
