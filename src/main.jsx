@@ -4,14 +4,16 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider, useLoaderData } from 'react-router-dom'
 
 import { LoginPage } from './Components/LoginPage'
-import { AllBlogPostsPage, allBlogPostsLoader } from './Components/AllBlogPostsPage'
+import { AllBlogPostsPage } from './Components/AllBlogPostsPage'
 import { CreateBlogPostPage } from './Components/CreateBlogPostPage'
 import { BlogPostPage } from './Components/BlogPostPage'
 // import { blogPostPageLoader } from './Components/BlogPostPage'
+import { ParentComponent } from './Components/ParentComponent'
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <ParentComponent/>,
     children: [
       {
         path: 'login',
@@ -20,12 +22,10 @@ const router = createBrowserRouter([
       {
         path: 'posts',
         element: <AllBlogPostsPage/>,
-        loader: allBlogPostsLoader,
       },
       {
         path: 'posts/:postid',
         element: <BlogPostPage/>,
-        // loader: blogPostPageLoader,
       },
       {
         path: 'create-post',

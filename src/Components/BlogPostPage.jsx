@@ -1,9 +1,10 @@
-import { useFetcher, useLoaderData, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import parse from 'html-react-parser';
 import { useEffect, useRef, useState } from "react";
 import { Modal } from "./Modal";
 import { BlogPostCreator } from "./BlogPostCreator";
-import { set } from "react-hook-form";
+
+import { useOutletContext } from "react-router-dom";
 
 // Called before the BlogPostPage component renders.
 // Loader functions somehow have access to the params object.
@@ -19,6 +20,10 @@ import { set } from "react-hook-form";
 
 // html-react-parser is used to parse the HTML content into React elements.
 export function BlogPostPage() {
+
+    const [ isParentChangeSubmitted, setIsParentChangeSubmitted ] = useOutletContext();
+    console.log('checking what ParentIsChangeSubmitted is')
+    console.log(isParentChangeSubmitted)
 
     const [ blogPost, setBlogPost ] = useState({});
     const [ comments , setComments ] = useState({});
@@ -84,6 +89,12 @@ export function BlogPostPage() {
         })
         setIsChangeSubmitted(true);
         setCurrentStatus('');
+
+        // here gonna test outletContext
+        console.log('checking if setIsParentChangeSubmitted is called')
+        console.log(setIsParentChangeSubmitted(true))
+        console.log('checking isParentChangeSubmitted')
+        console.log(isParentChangeSubmitted)
         navigate('/posts')
     }
 
@@ -98,6 +109,14 @@ export function BlogPostPage() {
         })
         setIsChangeSubmitted(true);
         setCurrentStatus('');
+
+        // here gonna test outletContext
+        console.log('checking if setIsParentChangeSubmitted is called')
+        console.log(setIsParentChangeSubmitted(true))
+        console.log('checking isParentChangeSubmitted')
+        console.log(isParentChangeSubmitted)
+
+    
     }
 
     async function handleConfirmEdit(data) {

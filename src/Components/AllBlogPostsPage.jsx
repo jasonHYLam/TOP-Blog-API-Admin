@@ -1,31 +1,39 @@
+import { useEffect, useState } from "react";
 import { useLoaderData, Link } from "react-router-dom"
-
-export async function allBlogPostsLoader() {
-    console.log('attempting all fetch')
-    return await fetch('http://localhost:3000/admin_all_posts', {
-        // I may need to pass JWT for this?
-        credentials: "include"
-    })
-    .then(res => res.json())
-
-}
-
-// i should probably use the User object... should i redirect? perhaps in the loader function?
 
 export function AllBlogPostsPage() {
 
-    const { allPosts, user } = useLoaderData();
-    console.log(allPosts)
-    console.log(`checking user:`)
-    console.log(user)
+    const [ isLoaded, setIsLoaded ] = useState(false);
+    const [ allBlogPosts, setAllBlogPosts ] = useState([]);
+    const [ user, setUser ] = useState({});
+    const [ isChangedSubmitted, setIsChangeSubmitted] = useState(false);
+
+    useEffect(() => {
+        async function allBlogPostsLoader() {
+            console.log('attempting all fetch')
+            const response = await fetch('http://localhost:3000/admin_all_posts', {
+                // I may need to pass JWT for this?
+                credentials: "include"
+            })
+            const { allPosts, user } = await response.json()
+
+            setIsLoaded(true);
+            setAllBlogPosts(allPosts);
+            setUser(user);
+        }
+        allBlogPostsLoader()
+    },
+    []
+    );
 
     return (
+        !isLoaded ? <p>Loading</p> :
         <>
         <p>All posts</p>
 
-        {(!allPosts.length) ? <p>No posts. Create a post?</p> 
+        {(!allBlogPosts.length) ? <p>No posts. Create a post?</p> 
         :
-        allPosts.map(post => {
+        allBlogPosts.map(post => {
             return (
                 <>
                 <Link key={post._id} to={`/posts/${post._id}`}>

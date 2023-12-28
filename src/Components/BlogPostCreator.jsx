@@ -9,7 +9,7 @@ import { Form, useNavigate } from 'react-router-dom';
 // blogContent is handled by the TinyMCE editor's initialValue
 
 // action is used to determine which function to use (either for editing or creating post)
-export function BlogPostCreator({title='', blogContent=null, handleAction, action, postid=''}) {
+export function BlogPostCreator({title='', blogContent=null, handleAction, postid=''}) {
 
     // formContent is obtained from React-Hook-Form, which allows access to the title input.
     // the blogContent is obtained using react state, and the handleUpdate function which allows access to TinyMCE's content.
