@@ -22,25 +22,7 @@ export function BlogPostCreator({title='', blogContent=null, handleAction, actio
             "content": currentContent,
         }))
 
-        if (action === 'edit') {
-            handleAction(data)
-        } 
-
-        else if (action === 'create') {
-
-            fetch('http://localhost:3000/admin_create_post', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Credentials': true
-                },
-                body: data,
-                credentials: 'include',
-            })
-            navigate('/posts')
-
-        }
-        else {return}
+        handleAction(data)
     }
 
     const { register, formState: {errors}, handleSubmit } = useForm({

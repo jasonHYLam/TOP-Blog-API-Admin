@@ -135,7 +135,7 @@ export function BlogPostPage() {
         currentStatus === 'edit' ? 
         <>
         <p>Currently editing:</p>
-        <BlogPostCreator title={blogPost.title} blogContent={blogPost.content} handleAction={handleConfirmEdit} action={'edit'} postid={postid}/>
+        <BlogPostCreator title={blogPost.title} blogContent={blogPost.content} handleAction={handleConfirmEdit} postid={postid}/>
 
         </>
         :
