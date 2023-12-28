@@ -58,18 +58,14 @@ export function BlogPostPage() {
 
     function handleDeleteButtonClick() {
         if (currentStatus !== 'delete') setCurrentStatus('delete');
-        console.log(`currentStatus status: ${currentStatus}`)
     }
 
     function handlePublishButtonClick() {
         if (currentStatus !== 'publish') setCurrentStatus('publish');
-        console.log(`currentStatus status: ${currentStatus}`)
     }
 
     function handleEditButtonClick() {
         if (currentStatus !== 'edit') setCurrentStatus('edit');
-        console.log(JSON.stringify(blogPost.content))
-        console.log(`currentStatus status: ${currentStatus}`)
     }
 
 
@@ -77,7 +73,7 @@ export function BlogPostPage() {
         if (currentStatus !== '') setCurrentStatus('');
     }
 
-    function handleConfirmDelete() {
+    async function handleConfirmDelete() {
         fetch(`http://localhost:3000/admin_blog_post/${postid}/delete_post`, {
             method: 'DELETE',
             headers: {
@@ -88,18 +84,30 @@ export function BlogPostPage() {
         })
         setIsChangeSubmitted(true);
         setCurrentStatus('');
-        // then frankly should navigate back to allPosts page. maybe do a cheeky little useEffect.
-        // navigate('/posts', {replace: true})
         navigate('/posts')
     }
 
-    function handleConfirmPublish() {
+    async function handleConfirmPublish() {
         fetch(`http://localhost:3000/admin_blog_post/${postid}/change_publish`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Credentials': true
             },
+            credentials: 'include',
+        })
+        setIsChangeSubmitted(true);
+        setCurrentStatus('');
+    }
+
+    async function handleConfirmEdit(data) {
+        fetch(`http://localhost:3000/admin_blog_post/${postid}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Credentials': true
+            },
+            body: data,
             credentials: 'include',
         })
         setIsChangeSubmitted(true);
@@ -127,7 +135,7 @@ export function BlogPostPage() {
         currentStatus === 'edit' ? 
         <>
         <p>Currently editing:</p>
-        <BlogPostCreator title={blogPost.title} blogContent={blogPost.content} action={'edit'} postid={postid}/>
+        <BlogPostCreator title={blogPost.title} blogContent={blogPost.content} handleAction={handleConfirmEdit} action={'edit'} postid={postid}/>
 
         </>
         :

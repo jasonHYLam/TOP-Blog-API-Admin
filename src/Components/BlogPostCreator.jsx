@@ -9,7 +9,7 @@ import { Form, useNavigate } from 'react-router-dom';
 // blogContent is handled by the TinyMCE editor's initialValue
 
 // action is used to determine which function to use (either for editing or creating post)
-export function BlogPostCreator({title='', blogContent=null, action, postid=''}) {
+export function BlogPostCreator({title='', blogContent=null, handleAction, action, postid=''}) {
 
     // formContent is obtained from React-Hook-Form, which allows access to the title input.
     // the blogContent is obtained using react state, and the handleUpdate function which allows access to TinyMCE's content.
@@ -23,18 +23,7 @@ export function BlogPostCreator({title='', blogContent=null, action, postid=''})
         }))
 
         if (action === 'edit') {
-
-            fetch(`http://localhost:3000/admin_blog_post/${postid}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Credentials': true
-                },
-                body: data,
-                credentials: 'include',
-            })
-            navigate('/posts')
-
+            handleAction(data)
         } 
 
         else if (action === 'create') {
@@ -67,6 +56,7 @@ export function BlogPostCreator({title='', blogContent=null, action, postid=''})
 
     return (
         <>
+            {/* <Form method='POST' action='/create-post' onSubmit={handleSubmit(submitFormData)}> */}
             <Form method='POST' action='/create-post' onSubmit={handleSubmit(submitFormData)}>
                 <label htmlFor="title">Title</label>
                 <input type="text"
