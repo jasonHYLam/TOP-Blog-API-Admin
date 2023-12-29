@@ -8,22 +8,15 @@ export function ParentComponent() {
 
     const [ isParentLoaded, setIsParentLoaded ] = useState(false);
     const [ isParentChangeSubmitted, setIsParentChangeSubmitted ] = useState(false);
-    function navigateAfterChange() {
-        setIsParentChangeSubmitted(true)
-        navigate('/posts')
-    }
-
-    function resetSubmittedState() {
-        setIsParentChangeSubmitted(false)
-    }
 
     useEffect(() => {
         console.log('check if parent useEffect is called')
         setIsParentLoaded(true)
         // to reset isChangeSubmitted
-        setIsParentChangeSubmitted(false)
+        // setIsParentChangeSubmitted(false)
     },
-    [isParentChangeSubmitted]
+    // [isParentChangeSubmitted]
+    []
     )
     // what i am hoping is that when i submit a change, everything will rerender
     // because the parent will rerender. 
@@ -33,7 +26,8 @@ export function ParentComponent() {
         !isParentLoaded ? <p>Loading...</p> : 
         <>
         <p>po</p>
-        <Outlet context={[isParentChangeSubmitted, setIsParentChangeSubmitted]}/>
+        {/* <Outlet context={[isParentChangeSubmitted, setIsParentChangeSubmitted]}/> */}
+        <Outlet/>
         </>
     )
 

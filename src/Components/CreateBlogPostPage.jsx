@@ -24,6 +24,8 @@ export function CreateBlogPostPage() {
         console.log('seeing if fetch finishes')
         navigate('/posts')
         console.log('seeing if navigate occurs')
+        // see if the new post is displayed on allPosts. I don't think it will be because
+        // there is no way that parent state is affected by this.
     }
     return (
         <>

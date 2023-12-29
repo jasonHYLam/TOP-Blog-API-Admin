@@ -6,33 +6,22 @@ import { BlogPostCreator } from "./BlogPostCreator";
 
 import { useOutletContext } from "react-router-dom";
 
-// Called before the BlogPostPage component renders.
-// Loader functions somehow have access to the params object.
-
-// export async function blogPostPageLoader({params}) {
-//     console.log('check that BLOGPOSTPAGE LOADER is called')
-//     const response = await fetch(`http://localhost:3000/admin_blog_post/${params.postid}`, {
-//         credentials: 'include',
-//     })
-//     const data = await response.json()
-//     return data
-// }
-
 // html-react-parser is used to parse the HTML content into React elements.
 export function BlogPostPage() {
 
-    const [ isParentChangeSubmitted, setIsParentChangeSubmitted ] = useOutletContext();
-    console.log('checking what ParentIsChangeSubmitted is')
-    console.log(isParentChangeSubmitted)
+    // OutletContext is used to set parent state, which triggers rerender of child and calls useEffect callback, 
+    // which updates component with fresh data.
+
+    // disable this and all references
+    // const [ isParentChangeSubmitted, setIsParentChangeSubmitted ] = useOutletContext();
+    // console.log('checking what ParentIsChangeSubmitted is')
+    // console.log(isParentChangeSubmitted)
 
     const [ blogPost, setBlogPost ] = useState({});
     const [ comments , setComments ] = useState({});
     const [ isLoaded, setIsLoaded ] = useState(false);
 
     const {postid} = useParams();
-
-    // const { blogPost, comments } = useLoaderData();
-
 
     const [currentStatus, setCurrentStatus] = useState('')
     // isChangeSubmitted is used to determine whether useEffect callback is called, as it is in the dependency array.
@@ -91,10 +80,8 @@ export function BlogPostPage() {
         setCurrentStatus('');
 
         // here gonna test outletContext
-        console.log('checking if setIsParentChangeSubmitted is called')
-        console.log(setIsParentChangeSubmitted(true))
-        console.log('checking isParentChangeSubmitted')
-        console.log(isParentChangeSubmitted)
+        // disable
+        // setIsParentChangeSubmitted(true)
         navigate('/posts')
     }
 
@@ -111,12 +98,9 @@ export function BlogPostPage() {
         setCurrentStatus('');
 
         // here gonna test outletContext
-        console.log('checking if setIsParentChangeSubmitted is called')
-        console.log(setIsParentChangeSubmitted(true))
-        console.log('checking isParentChangeSubmitted')
-        console.log(isParentChangeSubmitted)
-
-    
+        // disable
+        // setIsParentChangeSubmitted(true)
+        navigate('/posts')
     }
 
     async function handleConfirmEdit(data) {
@@ -131,6 +115,7 @@ export function BlogPostPage() {
         })
         setIsChangeSubmitted(true);
         setCurrentStatus('');
+        setIsParentChangeSubmitted(true)
     }
 
 

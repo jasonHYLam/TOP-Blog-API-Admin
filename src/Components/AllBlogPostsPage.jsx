@@ -6,6 +6,8 @@ export function AllBlogPostsPage() {
     const [ isLoaded, setIsLoaded ] = useState(false);
     const [ allBlogPosts, setAllBlogPosts ] = useState([]);
     const [ user, setUser ] = useState({});
+
+    // what is this for?
     const [ isChangedSubmitted, setIsChangeSubmitted] = useState(false);
 
     useEffect(() => {
@@ -16,6 +18,8 @@ export function AllBlogPostsPage() {
                 credentials: "include"
             })
             const { allPosts, user } = await response.json()
+            console.log('checking out allPosts');
+            console.log(allPosts);
 
             setIsLoaded(true);
             setAllBlogPosts(allPosts);
@@ -40,6 +44,8 @@ export function AllBlogPostsPage() {
                     <section>
                         <p>{post.title}</p>
                         <p> by {post.author.username}</p>
+                        {post.published_status ? <p>published</p> : <p>unpublished</p>}
+                        <p>created {post.date}</p>
                     </section>
                 </Link>
                 </>
