@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react"
 import { Outlet, useNavigate } from "react-router-dom"
+import { Header } from "./Header";
 
 export function ParentComponent() {
     const navigate = useNavigate()
@@ -25,7 +26,8 @@ export function ParentComponent() {
     return (
         !isParentLoaded ? <p>Loading...</p> : 
         <>
-        <p>po</p>
+        {/* <p>po</p> */}
+        <Header/>
         {/* <Outlet context={[isParentChangeSubmitted, setIsParentChangeSubmitted]}/> */}
         <Outlet/>
         </>

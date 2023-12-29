@@ -115,7 +115,7 @@ export function BlogPostPage() {
         })
         setIsChangeSubmitted(true);
         setCurrentStatus('');
-        setIsParentChangeSubmitted(true)
+        // setIsParentChangeSubmitted(true)
     }
 
 
@@ -160,6 +160,7 @@ export function BlogPostPage() {
             <hr />
             <section>
                 <h2>Comments</h2>
+                {/* need to create a comments form */}
             </section>
         </section>
         
