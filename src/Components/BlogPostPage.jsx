@@ -19,8 +19,11 @@ export function BlogPostPage() {
     // console.log(isParentChangeSubmitted)
 
     const [ blogPost, setBlogPost ] = useState({});
-    const [ comments , setComments ] = useState({});
+    const [ comments , setComments ] = useState([]);
     const [ isLoaded, setIsLoaded ] = useState(false);
+
+    console.log('checking out comments')
+    console.log(comments)
 
     const {postid} = useParams();
 
@@ -31,7 +34,7 @@ export function BlogPostPage() {
     const oppositeOfPublishedStatus = blogPost.published_status === true ? 'Unpublish' : 'Publish';
 
     useEffect( () => {
-        console.log('checking out if useEffect is called')
+        console.log('checking out if blogPostPageLoader useEffect is called')
         async function blogPostPageLoader() {
 
         const response = await fetch(`http://localhost:3000/admin_blog_post/${postid}`, {
@@ -153,8 +156,16 @@ export function BlogPostPage() {
             <hr />
             <section>
                 <h2>Comments</h2>
-                {/* need to create a comments form */}
-                <CommentForm/>
+                {!comments.length ? <p>No comments. Write a comment?</p> : 
+                comments.map(comment => {
+                    return (
+                        <>
+                        <p>comment.</p>
+                        </>
+                    )
+                })
+                }
+                <CommentForm siteRequest={'admin'} setIsChangeSubmitted={setIsChangeSubmitted}/>
             </section>
         </section>
         
