@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form"
 import { Form, useParams } from "react-router-dom"
-export function CommentForm() {
+export function CommentForm({setIsChangeSubmitted}) {
 
     const { postid } = useParams();
     const { register, formState: {errors}, handleSubmit } = useForm();
@@ -11,9 +11,18 @@ export function CommentForm() {
 
         console.log('checking out data to post')
         console.log(data)
-
-
+        await fetch(`http://localhost:3000/home/${postid}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Credentials': true,
+            },
+            credentials: 'include',
+        }
+        )
+        setIsChangeSubmitted(true)
     }
+
     return (
 
         <>

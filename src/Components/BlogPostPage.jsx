@@ -5,6 +5,7 @@ import { Modal } from "./Modal";
 import { BlogPostCreator } from "./BlogPostCreator";
 
 import { useOutletContext } from "react-router-dom";
+import { CommentForm } from "./CommentForm";
 
 // html-react-parser is used to parse the HTML content into React elements.
 export function BlogPostPage() {
@@ -67,7 +68,7 @@ export function BlogPostPage() {
         if (currentStatus !== '') setCurrentStatus('');
     }
 
-    async function handleConfirmDelete() {
+    async function handleConfirmDeletePost() {
         fetch(`http://localhost:3000/admin_blog_post/${postid}/delete_post`, {
             method: 'DELETE',
             headers: {
@@ -78,10 +79,6 @@ export function BlogPostPage() {
         })
         setIsChangeSubmitted(true);
         setCurrentStatus('');
-
-        // here gonna test outletContext
-        // disable
-        // setIsParentChangeSubmitted(true)
         navigate('/posts')
     }
 
@@ -96,14 +93,9 @@ export function BlogPostPage() {
         })
         setIsChangeSubmitted(true);
         setCurrentStatus('');
-
-        // here gonna test outletContext
-        // disable
-        // setIsParentChangeSubmitted(true)
-        navigate('/posts')
     }
 
-    async function handleConfirmEdit(data) {
+    async function handleConfirmEditPost(data) {
         fetch(`http://localhost:3000/admin_blog_post/${postid}`, {
             method: 'PUT',
             headers: {
@@ -115,8 +107,9 @@ export function BlogPostPage() {
         })
         setIsChangeSubmitted(true);
         setCurrentStatus('');
-        // setIsParentChangeSubmitted(true)
     }
+
+
 
 
     return (
@@ -127,7 +120,7 @@ export function BlogPostPage() {
         <button onClick={handleEditButtonClick}>Edit</button>
 
         {// Show delete/publish/edit modals depending on current status of Page component, using ternary operator.
-        currentStatus === 'delete' ? <Modal action={'delete'} handleAction={handleConfirmDelete} handleCancel={handleCancelButtonClick}></Modal>
+        currentStatus === 'delete' ? <Modal action={'delete'} handleAction={handleConfirmDeletePost} handleCancel={handleCancelButtonClick}></Modal>
 
         : currentStatus === 'publish' ?  <Modal action={oppositeOfPublishedStatus.toLowerCase()} handleAction={handleConfirmPublish} handleCancel={handleCancelButtonClick}></Modal>
 
@@ -139,7 +132,7 @@ export function BlogPostPage() {
         currentStatus === 'edit' ? 
         <>
         <p>Currently editing:</p>
-        <BlogPostCreator title={blogPost.title} blogContent={blogPost.content} handleAction={handleConfirmEdit} postid={postid}/>
+        <BlogPostCreator title={blogPost.title} blogContent={blogPost.content} handleAction={handleConfirmEditPost} postid={postid}/>
 
         </>
         :
@@ -161,6 +154,7 @@ export function BlogPostPage() {
             <section>
                 <h2>Comments</h2>
                 {/* need to create a comments form */}
+                <CommentForm/>
             </section>
         </section>
         
