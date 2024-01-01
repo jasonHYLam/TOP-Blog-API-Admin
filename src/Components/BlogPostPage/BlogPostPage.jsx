@@ -1,11 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom"
 import parse from 'html-react-parser';
 import { useEffect, useRef, useState } from "react";
-import { Modal } from "./Modal";
-import { BlogPostCreator } from "./BlogPostCreator";
+import { Modal } from "../Modal/Modal";
+import { BlogPostCreator } from "../BlogPostCreator/BlogPostCreator";
 
 import { useOutletContext } from "react-router-dom";
-import { CommentForm } from "./CommentForm";
+import { CommentForm } from "../CommentForm/CommentForm";
 
 // html-react-parser is used to parse the HTML content into React elements.
 export function BlogPostPage() {
@@ -22,8 +22,11 @@ export function BlogPostPage() {
     const [ comments , setComments ] = useState([]);
     const [ isLoaded, setIsLoaded ] = useState(false);
 
-    console.log('checking out comments')
-    console.log(comments)
+    // console.log('checking out comments')
+    // console.log(comments)
+    console.log('checking out blog post')
+    console.log(blogPost)
+
 
     const {postid} = useParams();
 
@@ -146,6 +149,8 @@ export function BlogPostPage() {
                     <h1>{blogPost.title}</h1>
                     <p>by {blogPost.author.username}</p>
                     {blogPost.published_status ? <p>Currently published</p> : <p>Currently unpublished</p>}
+                    <p>created on {blogPost.date}</p>
+                    <p>created on {blogPost.dateFormatted}</p>
 
                 </section>
                 <hr />
@@ -160,7 +165,9 @@ export function BlogPostPage() {
                 comments.map(comment => {
                     return (
                         <>
-                        <p>comment.</p>
+                        <p>{comment.author.username}</p>
+                        <p>{comment.text}</p>
+                        <p>{comment.timeStampFormatted}</p>
                         </>
                     )
                 })

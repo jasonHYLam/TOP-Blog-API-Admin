@@ -2,7 +2,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Form, useNavigate } from 'react-router-dom';
-import { BlogPostCreator } from './BlogPostCreator';
+import { BlogPostCreator } from '../BlogPostCreator/BlogPostCreator';
 
 
 

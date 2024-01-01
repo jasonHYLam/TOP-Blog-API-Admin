@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom/client'
 // import './index.css'
 import { createBrowserRouter, RouterProvider, useLoaderData } from 'react-router-dom'
 
-import { LoginPage } from './Components/LoginPage'
-import { AllBlogPostsPage } from './Components/AllBlogPostsPage'
-import { CreateBlogPostPage } from './Components/CreateBlogPostPage'
-import { BlogPostPage } from './Components/BlogPostPage'
+import { LoginPage } from './Components/LoginPage/LoginPage'
+import { AllBlogPostsPage } from './Components/AllBlogPostsPage/AllBlogPostsPage'
+import { CreateBlogPostPage } from './Components/CreateBlogPostPage/CreateBlogPostPage'
+import { BlogPostPage } from './Components/BlogPostPage/BlogPostPage'
 // import { blogPostPageLoader } from './Components/BlogPostPage'
-import { ParentComponent } from './Components/ParentComponent'
+import { ParentComponent } from './Components/ParentComponent/ParentComponent'
 
 const router = createBrowserRouter([
   {
