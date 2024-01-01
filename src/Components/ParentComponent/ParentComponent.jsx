@@ -9,7 +9,6 @@ export function ParentComponent() {
     const [ isParentLoaded, setIsParentLoaded ] = useState(false);
 
     useEffect(() => {
-        console.log('check if parent useEffect is called')
         setIsParentLoaded(true)
     },
     []

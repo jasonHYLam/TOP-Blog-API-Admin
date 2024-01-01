@@ -1,10 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom"
-import parse from 'html-react-parser';
 import { useEffect, useState } from "react";
 import { Modal } from "../Modal/Modal";
 import { BlogPostCreator } from "../BlogPostCreator/BlogPostCreator";
 import { CommentForm } from "../CommentForm/CommentForm";
 import { Post } from "../Post/Post";
+import { Comment } from "../Comment/Comment";
 
 // html-react-parser is used to parse the HTML content into React elements.
 export function BlogPostPage() {
@@ -129,19 +129,15 @@ export function BlogPostPage() {
             <Post blogPost={blogPost}/>
             <hr />
             <section>
+                <CommentForm setIsChangeSubmitted={setIsChangeSubmitted}/>
                 <h2>Comments</h2>
                 {!comments.length ? <p>No comments. Write a comment?</p> : 
                 comments.map(comment => {
                     return (
-                        <>
-                        <p>{comment.author.username}</p>
-                        <p>{comment.text}</p>
-                        <p>{comment.timeStampFormatted}</p>
-                        </>
+                        <Comment key={comment._id} comment={comment}/>
                     )
                 })
                 }
-                <CommentForm setIsChangeSubmitted={setIsChangeSubmitted}/>
             </section>
         </section>
         
