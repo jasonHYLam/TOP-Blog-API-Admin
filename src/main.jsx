@@ -1,13 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-// import './index.css'
-import { createBrowserRouter, RouterProvider, useLoaderData } from 'react-router-dom'
+import './index.css'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import { LoginPage } from './Components/LoginPage/LoginPage'
 import { AllBlogPostsPage } from './Components/AllBlogPostsPage/AllBlogPostsPage'
 import { CreateBlogPostPage } from './Components/CreateBlogPostPage/CreateBlogPostPage'
 import { BlogPostPage } from './Components/BlogPostPage/BlogPostPage'
-// import { blogPostPageLoader } from './Components/BlogPostPage'
 import { ParentComponent } from './Components/ParentComponent/ParentComponent'
 
 const router = createBrowserRouter([
@@ -30,7 +29,6 @@ const router = createBrowserRouter([
       {
         path: 'create-post',
         element: <CreateBlogPostPage/>,
-        // action: onSubmit,
       },
     ]
 

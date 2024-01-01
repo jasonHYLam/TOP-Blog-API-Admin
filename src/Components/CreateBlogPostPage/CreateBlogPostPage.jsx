@@ -1,10 +1,5 @@
-import { Editor } from '@tinymce/tinymce-react';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Form, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { BlogPostCreator } from '../BlogPostCreator/BlogPostCreator';
-
-
 
 export function CreateBlogPostPage() {
 
@@ -21,11 +16,7 @@ export function CreateBlogPostPage() {
             body: data,
             credentials: 'include',
         })
-        console.log('seeing if fetch finishes')
         navigate('/posts')
-        console.log('seeing if navigate occurs')
-        // see if the new post is displayed on allPosts. I don't think it will be because
-        // there is no way that parent state is affected by this.
     }
     return (
         <>

@@ -38,7 +38,6 @@ export function BlogPostCreator({title='', blogContent=null, handleAction, posti
 
     return (
         <>
-            {/* <Form method='POST' action='/create-post' onSubmit={handleSubmit(submitFormData)}> */}
             <Form method='POST' action='/create-post' onSubmit={handleSubmit(submitFormData)}>
                 <label htmlFor="title">Title</label>
                 <input type="text"
@@ -47,7 +46,6 @@ export function BlogPostCreator({title='', blogContent=null, handleAction, posti
 
                 <Editor
                 apiKey={import.meta.env.VITE_TINY_MCE_API_KEY}
-                // textareaName='blog-post-content'
                 init={{
                     plugins: 'link lists'
                 }}
