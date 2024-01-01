@@ -1,32 +1,17 @@
 import { useNavigate, useParams } from "react-router-dom"
 import parse from 'html-react-parser';
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "../Modal/Modal";
 import { BlogPostCreator } from "../BlogPostCreator/BlogPostCreator";
-
-import { useOutletContext } from "react-router-dom";
 import { CommentForm } from "../CommentForm/CommentForm";
+import { Post } from "../Post/Post";
 
 // html-react-parser is used to parse the HTML content into React elements.
 export function BlogPostPage() {
 
-    // OutletContext is used to set parent state, which triggers rerender of child and calls useEffect callback, 
-    // which updates component with fresh data.
-
-    // disable this and all references
-    // const [ isParentChangeSubmitted, setIsParentChangeSubmitted ] = useOutletContext();
-    // console.log('checking what ParentIsChangeSubmitted is')
-    // console.log(isParentChangeSubmitted)
-
     const [ blogPost, setBlogPost ] = useState({});
     const [ comments , setComments ] = useState([]);
     const [ isLoaded, setIsLoaded ] = useState(false);
-
-    // console.log('checking out comments')
-    // console.log(comments)
-    console.log('checking out blog post')
-    console.log(blogPost)
-
 
     const {postid} = useParams();
 
@@ -115,9 +100,6 @@ export function BlogPostPage() {
         setCurrentStatus('');
     }
 
-
-
-
     return (
         !isLoaded ? <p>Loading</p> : 
         <>
@@ -144,7 +126,7 @@ export function BlogPostPage() {
         :
 
         <section>
-            <section>
+            {/* <section>
                 <section>
                     <h1>{blogPost.title}</h1>
                     <p>by {blogPost.author.username}</p>
@@ -157,7 +139,8 @@ export function BlogPostPage() {
                 <section>
                     {parse(blogPost.content)}
                 </section>
-            </section>
+            </section> */}
+            <Post blogPost={blogPost}/>
             <hr />
             <section>
                 <h2>Comments</h2>
