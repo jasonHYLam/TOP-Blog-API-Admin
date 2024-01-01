@@ -1,5 +1,7 @@
+import { PostPreview } from "../PostPreview/PostPreview";
 import { useEffect, useState } from "react";
-import { useLoaderData, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
+import styles from './AllBlogPostsPage.module.css'
 
 export function AllBlogPostsPage() {
 
@@ -37,20 +39,19 @@ export function AllBlogPostsPage() {
 
         {(!allBlogPosts.length) ? <p>No posts. Create a post?</p> 
         :
-        allBlogPosts.map(post => {
-            return (
-                <>
-                <Link key={post._id} to={`/posts/${post._id}`}>
-                    <section>
-                        <p>{post.title}</p>
-                        <p> by {post.author.username}</p>
-                        {post.published_status ? <p>published</p> : <p>unpublished</p>}
-                        <p>created {post.date}</p>
-                    </section>
-                </Link>
-                </>
-            )
-        })
+
+        <section className={styles.postsGroup}>
+
+            {allBlogPosts.map(post => {
+                return (
+                    <>
+                    <PostPreview key={post._id} post={post} />
+                    </>
+                )
+            })
+            }
+
+        </section>
         }
         
         </>
