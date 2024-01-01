@@ -141,7 +141,7 @@ export function BlogPostPage() {
                     )
                 })
                 }
-                <CommentForm siteRequest={'admin'} setIsChangeSubmitted={setIsChangeSubmitted}/>
+                <CommentForm setIsChangeSubmitted={setIsChangeSubmitted}/>
             </section>
         </section>
         
