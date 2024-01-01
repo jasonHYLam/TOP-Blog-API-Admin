@@ -15,7 +15,7 @@ export function Post({blogPost}) {
 
                 </section>
                 <hr />
-                <section>
+                <section className={styles.blogPostContent}>
                     {parse(blogPost.content)}
                 </section>
             </section>
