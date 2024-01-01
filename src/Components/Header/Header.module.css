@@ -2,3 +2,18 @@
     height: 70px;
     background-color: blue;
 }
+
+.linksGroup {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+.headerText {
+    font-size: 20px;
+    color: white;
+    /* text-shadow: 0 3px 0 black; */
+    font-stretch: extra-expanded;
+    /* font-weight: 1000; */
+}
