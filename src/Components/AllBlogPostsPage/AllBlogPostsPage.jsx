@@ -1,17 +1,27 @@
 import { PostPreview } from "../PostPreview/PostPreview";
 import { useEffect, useState } from "react";
 import styles from './AllBlogPostsPage.module.css'
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 export function AllBlogPostsPage() {
 
     const [ isLoaded, setIsLoaded ] = useState(false);
     const [ allBlogPosts, setAllBlogPosts ] = useState([]);
     const [ user, setUser ] = useState({});
+    const [ isAdminLoggedIn, setIsAdminLoggedIn  ] = useOutletContext();
+    const navigate = useNavigate();
 
+    console.log('checking isAdminLoggedIn')
+    console.log(isAdminLoggedIn)
+    // credentials: 'include' is necessary for passing JWT to the server in order for authorization.
     useEffect(() => {
+
+        if (!isAdminLoggedIn) {
+            navigate('/login')
+        }
+
         async function allBlogPostsLoader() {
             const response = await fetch('http://localhost:3000/admin_all_posts', {
-                // I may need to pass JWT for this?
                 credentials: "include"
             })
             const { allPosts, user } = await response.json()

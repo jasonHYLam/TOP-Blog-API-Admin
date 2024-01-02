@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 
 import { LoginPage } from './Components/LoginPage/LoginPage'
 import { AllBlogPostsPage } from './Components/AllBlogPostsPage/AllBlogPostsPage'
@@ -14,6 +14,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <ParentComponent/>,
     children: [
+      {
+        index: true,
+        element: <Navigate replace to='/posts' />
+      },
       {
         path: 'login',
         element: <LoginPage/>
