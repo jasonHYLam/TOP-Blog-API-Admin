@@ -1,8 +1,8 @@
 # Blog Project (Admin Site)
-
-![Blog-API-Public-Homepage](https://github.com/jasonHYLam/TOP-Blog-API-Admin/assets/105083538/d420750b-3f1b-4485-8a91-dbd220e96c4b)
-![Blog-API-Public-Postpage](https://github.com/jasonHYLam/TOP-Blog-API-Admin/assets/105083538/b458bf86-9551-4162-9fcd-3087dbe008ab)
-![Blog-API-Public-Comments](https://github.com/jasonHYLam/TOP-Blog-API-Admin/assets/105083538/aa53ac02-92b6-45a5-b7eb-e2a353e98588)
+![Blog-API-Admin-Home](https://github.com/jasonHYLam/TOP-Blog-API-Admin/assets/105083538/97f7d4e7-4741-468a-a3d1-6bb0e6bdc204)
+![Blog-API-Admin-Delete](https://github.com/jasonHYLam/TOP-Blog-API-Admin/assets/105083538/3160b84f-44b4-4a85-b89b-f77d2f424da3)
+![Blog-API-Admin-Edit](https://github.com/jasonHYLam/TOP-Blog-API-Admin/assets/105083538/8cedf3bd-394d-4de7-ab11-60e7f6417e7b)
+![Blog-API-Amin-Create](https://github.com/jasonHYLam/TOP-Blog-API-Admin/assets/105083538/120c8959-970c-46d3-8667-84cb46e17574)
 
 
 This repo contains the Admin Frontend app for The Odin Project Blog-API project.
