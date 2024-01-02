@@ -6,9 +6,9 @@
 
 
 This repo contains the Admin Frontend app for The Odin Project Blog-API project.
-This may have been the most challenging project thus far, largely owing to many concepts being completely new to me. 
+This may have been the most challenging project thus far, due to the scale and largely owing to many concepts being completely new to me. 
 
-I have made use of the TinyMCE editor to make rich text blog posts. There is authentication for the admin, as well as authorization for most routes to determine if the user is an admin.
+TinyMCE editor is used to make rich text blog posts. There is authentication for the admin, as well as authorization for most routes to determine if the user is an admin.
 
 The admin can create, delete, publish and edit blog posts.
 
