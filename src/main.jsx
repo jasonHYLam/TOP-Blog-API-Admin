@@ -4,6 +4,7 @@ import './index.css'
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 
 import { LoginPage } from './Components/LoginPage/LoginPage'
+import { Logout } from './Components/Logout/Logout'
 import { AllBlogPostsPage } from './Components/AllBlogPostsPage/AllBlogPostsPage'
 import { CreateBlogPostPage } from './Components/CreateBlogPostPage/CreateBlogPostPage'
 import { BlogPostPage } from './Components/BlogPostPage/BlogPostPage'
@@ -34,6 +35,11 @@ const router = createBrowserRouter([
         path: 'create-post',
         element: <CreateBlogPostPage/>,
       },
+      {
+        path: 'logout',
+        element: <Logout/>
+      },
+
     ]
 
   }
