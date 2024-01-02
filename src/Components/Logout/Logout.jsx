@@ -9,13 +9,13 @@ export function Logout() {
     useEffect(() => {
 
         async function logout() {
-            fetch('http://localhost:3000/logout', {credentials: "include"})
+            fetch('http://localhost:3000/admin_logout', {credentials: "include"})
             setIsAdminLoggedIn(false)
         }
         logout()
         navigate('/login')
     },
-    [navigate, setIsUserLoggedIn]
+    [navigate, setIsAdminLoggedIn]
     )
 
     return (

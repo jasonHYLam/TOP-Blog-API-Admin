@@ -14,6 +14,8 @@ export function AllBlogPostsPage() {
     // credentials: 'include' is necessary for passing JWT to the server in order for authorization.
     useEffect(() => {
 
+        console.log('checking isAdminLoggedIn')
+        console.log(isAdminLoggedIn)
         if (!isAdminLoggedIn) {
             navigate('/login')
         }
