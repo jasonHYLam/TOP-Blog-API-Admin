@@ -11,8 +11,6 @@ export function AllBlogPostsPage() {
     const [ isAdminLoggedIn, setIsAdminLoggedIn  ] = useOutletContext();
     const navigate = useNavigate();
 
-    console.log('checking isAdminLoggedIn')
-    console.log(isAdminLoggedIn)
     // credentials: 'include' is necessary for passing JWT to the server in order for authorization.
     useEffect(() => {
 
@@ -38,22 +36,23 @@ export function AllBlogPostsPage() {
     return (
         !isLoaded ? <p>Loading</p> :
         <>
-        <p>All posts</p>
+            <p>All posts</p>
+            <p>Welcome back {user.username}</p>
 
-        {(!allBlogPosts.length) ? <p>No posts. Create a post?</p> 
-        :
+            {(!allBlogPosts.length) ? <p>No posts. Create a post?</p> 
+            :
 
-        <section className={styles.postsGroup}>
+            <section className={styles.postsGroup}>
 
-            {allBlogPosts.map(post => {
-                return (
-                    <PostPreview key={post._id} post={post} />
-                )
-            })
+                {allBlogPosts.map(post => {
+                    return (
+                        <PostPreview key={post._id} post={post} />
+                    )
+                })
+                }
+
+            </section>
             }
-
-        </section>
-        }
         
         </>
     )

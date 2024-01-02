@@ -9,6 +9,7 @@ export function Header() {
 
                     <Link className={styles.headerText} to={'/posts'}>All Posts</Link>
                     <Link className={styles.headerText} to={'create-post'}>Create Post</Link>
+                    <Link className={styles.headerText} >Logout</Link>
 
                 </div>
             </header>

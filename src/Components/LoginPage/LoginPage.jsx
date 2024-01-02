@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form"
-import { useNavigate, Form } from "react-router-dom";
+import { useNavigate, Form, useOutletContext } from "react-router-dom";
 
 export function LoginPage() {
 
     const { register, formState: {errors}, handleSubmit } = useForm();
     const [ backendError, setBackendError ] = useState('')
     const navigate = useNavigate()
+    const [ isAdminLoggedIn, setIsAdminLoggedIn  ] = useOutletContext();
+
 
     const onSubmit = async (data) => {
         await fetch('http://localhost:3000/login_admin', {
@@ -25,6 +27,7 @@ export function LoginPage() {
             else {
                 console.log('a most incredible success')
                 console.log(res)
+                setIsAdminLoggedIn(true)
                 navigate('/posts');
             }
         })

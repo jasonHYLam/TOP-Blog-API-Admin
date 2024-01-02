@@ -15,8 +15,8 @@ export function CreateBlogPostPage() {
         }
 
         setIsLoaded(true);
-
     });
+
     async function handleConfirmCreate(data) {
 
         fetch('http://localhost:3000/admin_create_post', {

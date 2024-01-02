@@ -22,7 +22,6 @@ export function BlogPostPage() {
     const oppositeOfPublishedStatus = blogPost.published_status === true ? 'Unpublish' : 'Publish';
 
     useEffect( () => {
-        console.log('checking out if blogPostPageLoader useEffect is called')
         async function blogPostPageLoader() {
 
         const response = await fetch(`http://localhost:3000/admin_blog_post/${postid}`, {
