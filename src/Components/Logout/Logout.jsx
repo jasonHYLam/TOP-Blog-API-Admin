@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useNavigate, useOutletContext } from "react-router-dom"
 
 export function Logout() {
+    console.log('checking logout component is accessed')
 
     const navigate = useNavigate();
     const [ isAdminLoggedIn, setIsAdminLoggedIn ] = useOutletContext();
