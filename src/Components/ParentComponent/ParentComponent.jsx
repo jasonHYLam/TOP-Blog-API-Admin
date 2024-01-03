@@ -17,7 +17,7 @@ export function ParentComponent() {
         // If successful, isAdminLoggedIn is set to true, and will allow access to other routes.
         async function checkIfLoggedIn() {
 
-            const response = await fetch('http://localhost:3000/get_admin_user', {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/get_admin_user`, {
                 credentials: 'include'
             })
 

@@ -11,7 +11,7 @@ export function LoginPage() {
 
 
     const onSubmit = async (data) => {
-        await fetch('http://localhost:3000/login_admin', {
+        await fetch(`${import.meta.env.VITE_BACKEND_URL}/login_admin`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

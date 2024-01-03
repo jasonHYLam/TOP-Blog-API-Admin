@@ -10,7 +10,7 @@ export function Logout() {
     useEffect(() => {
 
         async function logout() {
-            fetch('http://localhost:3000/admin_logout', {credentials: "include"})
+            fetch(`${import.meta.env.VITE_BACKEND_URL}/admin_logout`, {credentials: "include"})
             setIsAdminLoggedIn(false)
         }
         logout()

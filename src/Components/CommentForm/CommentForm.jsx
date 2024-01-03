@@ -10,7 +10,7 @@ export function CommentForm({setIsChangeSubmitted}) {
     // Make a post request with the stringified comment object.
     // Then, reset the form and set blogPostPage state to trigger useEffect hook and rerender with new comment.
     const onSubmit = async (data) => {
-        fetch(`http://localhost:3000/admin_blog_post/${postid}`, {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/admin_blog_post/${postid}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

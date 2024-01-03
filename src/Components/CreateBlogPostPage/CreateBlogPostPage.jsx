@@ -19,7 +19,7 @@ export function CreateBlogPostPage() {
 
     async function handleConfirmCreate(data) {
 
-        fetch('http://localhost:3000/admin_create_post', {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/admin_create_post`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

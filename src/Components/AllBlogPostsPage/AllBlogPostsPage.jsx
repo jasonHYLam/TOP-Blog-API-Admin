@@ -4,7 +4,6 @@ import styles from './AllBlogPostsPage.module.css'
 import { useNavigate, useOutletContext } from "react-router-dom";
 
 export function AllBlogPostsPage() {
-
     const [ isLoaded, setIsLoaded ] = useState(false);
     const [ allBlogPosts, setAllBlogPosts ] = useState([]);
     const [ user, setUser ] = useState({});
@@ -21,7 +20,7 @@ export function AllBlogPostsPage() {
         }
 
         async function allBlogPostsLoader() {
-            const response = await fetch('http://localhost:3000/admin_all_posts', {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/admin_all_posts`, {
                 credentials: "include"
             })
             const { allPosts, user } = await response.json()

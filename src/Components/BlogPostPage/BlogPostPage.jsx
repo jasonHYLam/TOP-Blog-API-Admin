@@ -24,7 +24,7 @@ export function BlogPostPage() {
     useEffect( () => {
         async function blogPostPageLoader() {
 
-        const response = await fetch(`http://localhost:3000/admin_blog_post/${postid}`, {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/admin_blog_post/${postid}`, {
             credentials: 'include',
         })
         const { blogPost, comments } = await response.json()
@@ -59,7 +59,7 @@ export function BlogPostPage() {
     }
 
     async function handleConfirmDeletePost() {
-        fetch(`http://localhost:3000/admin_blog_post/${postid}/delete_post`, {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/admin_blog_post/${postid}/delete_post`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ export function BlogPostPage() {
     }
 
     async function handleConfirmPublish() {
-        fetch(`http://localhost:3000/admin_blog_post/${postid}/change_publish`, {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/admin_blog_post/${postid}/change_publish`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export function BlogPostPage() {
     }
 
     async function handleConfirmEditPost(data) {
-        fetch(`http://localhost:3000/admin_blog_post/${postid}`, {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/admin_blog_post/${postid}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
